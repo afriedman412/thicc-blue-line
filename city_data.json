@@ -1,0 +1,6 @@
+[
+    { "id": "newyorkcity", "name": "New York City", "cx": 914, "cy": 172},
+    { "id": "chicago", "name": "Chicago", "cx": 706, "cy": 206 },
+    { "id": "louisville", "name": "Louisville", "cx": 730, "cy": 280 },
+    { "id": "sanfrancisco", "name": "San Francisco", "cx": 165, "cy": 258 }
+]

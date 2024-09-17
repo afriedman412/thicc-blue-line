@@ -1,67 +1,42 @@
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
     margin: 0;
-    margin-top: 20px;
+    display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     background-color: #f0f0f0;
   }
 
-:root {
-    --blue-line-height: 30;  /* Initial value to ensure layout isn't broken */
-}
-
-#main {
-    width: 1000px;
-    margin: 0 auto;
-    display: flex;
-}
-
-.upper-container {
-    margin: 0 auto;
-    width: 500px;
-    overflow: visible
-    
-}
-
-/* Flag Styles */
   .flag {
     width: 400px;
     height: 240px;
-    margin: 0 auto;
     position: relative;
     border: 1px solid black;
   }
 
   /* LAYER 1: Stripes */
-.stripe {
+  .stripe {
     width: 100%;
     position: relative; /* Stripes follow normal flow */
     margin: 0;
     padding: 0;
   }
-
-.black-stripe {
+  .black-stripe {
     background-color: black;
   }
-.white-stripe {
-    background-color: white;
+  .white-stripe {
+    background-color: green;
   }
-.blue-stripe {
+  .blue-stripe {
     background-color: #0000ff;
     height: var(--blue-line-height);
-    min-height: 1px; /* Prevent stripes from disappearing */
   }
-
-.remaining-stripe {
+  .remaining-stripe {
     height: calc((100% - var(--blue-line-height)) / 6); /* Remaining height divided by 6 stripes */
-    min-height: 1px; /* Prevent stripes from disappearing */
   }
 
-/* LAYER 2: Black Box (Union) with Fixed Size */
-.union {
+  /* LAYER 2: Black Box (Union) with Fixed Size */
+  .union {
     position: absolute;
     top: 0;
     left: 0;
@@ -72,7 +47,7 @@ body {
   }
 
   /* LAYER 3: Stars inside the Union */
-.union-stars {
+  .union-stars {
     position: absolute;
     top: 0;
     left: 0;
@@ -85,9 +60,8 @@ body {
     z-index: 3; /* Stars above the black box */
   }
 
-
-/* Individual rows of stars */
-.row {
+  /* Individual rows of stars */
+  .row {
     display: flex;
     justify-content: space-between;
     margin-left: 4px;
@@ -95,67 +69,14 @@ body {
     width: 100%;
   }
 
-.row:nth-child(even) {
+  .row:nth-child(even) {
     justify-content: space-around; /* Closer spacing for the rows with 5 stars */
   }
 
-
-/* Individual star */
-.star {
+  /* Individual star */
+  .star {
     width: 12px; /* Star size */
     height: 12px;
     background-color: white;
     clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
   }
-  
-/* Container for the Map */
-#map-container {
-    position: relative;
-    width: 960px;
-    margin: 0 auto;
-  }
-  
-  /* Style for the city name text */
-  #selected-city-name {
-    margin-bottom: 20px;
-    font-size: 24px;
-    color: #333;
-  }
-  
-
-circle {
-    fill: #3498db;
-    transition: fill 0.2s ease;
-  }
-  
-circle:hover {
-    fill: #e74c3c;
-  }
-  
-#tooltip {
-    display: none;
-    position: absolute;
-    padding: 4px;
-    background-color: white;
-    border: 1px solid black;
-    pointer-events: none;
-    z-index: 1000;
-    white-space: nowrap;
-  }
-
-  
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
- 
-  

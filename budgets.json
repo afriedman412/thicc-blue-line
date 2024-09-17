@@ -1,0 +1,17 @@
+{
+    "chicago": {
+      "name": "Chicago",
+      "totalBudget": "1000000",
+      "policeBudget": "300000"
+    },
+    "newyorkcity": {
+      "name": "New York City",
+      "totalBudget": "1000",
+      "policeBudget": "400"
+    },
+    "louisville": {
+      "name": "Louisville",
+      "totalBudget": "1000",
+      "policeBudget": "500"
+    }
+  }
