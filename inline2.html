@@ -1,0 +1,70 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive US Map</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- SVG loaded externally -->
+<object id="svg-map" type="image/svg+xml" data="us.svg" width="1000" height="589"></object>
+
+<!-- Inline SVG for cities overlay -->
+<svg width="1000" height="589" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 589">
+    <!-- Circle representing cities -->
+    <circle class="city" id="newyork" cx="860" cy="200" r="10" fill="blue" />
+    <circle class="city" id="la" cx="170" cy="450" r="10" fill="blue" />
+    <circle class="city" id="chicago" cx="620" cy="240" r="10" fill="blue" />
+    <circle class="city" id="houston" cx="580" cy="410" r="10" fill="blue" />
+
+    <!-- Text to show city names on hover -->
+    <text id="city-name" x="0" y="0" visibility="hidden" fill="black" font-size="16" font-family="Arial"></text>
+
+    <style>
+        /* CSS for hover effects */
+        .city:hover {
+            fill: red;
+            cursor: pointer;
+        }
+    </style>
+
+    <script>
+        // Add city names for display on hover
+        const cities = {
+            newyork: 'New York',
+            la: 'Los Angeles',
+            chicago: 'Chicago',
+            houston: 'Houston'
+        };
+
+        // Show the city name on hover
+        document.querySelectorAll('.city').forEach(circle => {
+            circle.addEventListener('mouseover', function() {
+                const cityName = cities[this.id];
+                const textElement = document.getElementById('city-name');
+                textElement.textContent = cityName;
+                textElement.setAttribute('x', parseFloat(this.getAttribute('cx')) + 15);
+                textElement.setAttribute('y', parseFloat(this.getAttribute('cy')) - 10);
+                textElement.setAttribute('visibility', 'visible');
+            });
+
+            circle.addEventListener('mouseout', function() {
+                const textElement = document.getElementById('city-name');
+                textElement.setAttribute('visibility', 'hidden');
+            });
+
+            // Add click event to do something when the city is clicked
+            circle.addEventListener('click', function() {
+                alert('City clicked: ' + cities[this.id]);
+            });
+        });
+    </script>
+</svg>
+
+</body>
+</html>

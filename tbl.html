@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thin Blue Line American Flag (CSS)</title>
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+    }
+
+    .flag {
+      width: 400px;
+      height: 240px;
+      position: relative;
+      border: 1px solid black;
+    }
+
+    /* LAYER 1: Stripes */
+    .stripe {
+      width: 100%;
+      position: relative; /* Stripes follow normal flow */
+      margin: 0;
+      padding: 0;
+    }
+    .black-stripe {
+      background-color: black;
+    }
+    .white-stripe {
+      background-color: white;
+    }
+    .blue-stripe {
+      background-color: #0000ff;
+      height: var(--blue-line-height);
+    }
+    .remaining-stripe {
+      height: calc((100% - var(--blue-line-height)) / 6); /* Remaining height divided by 6 stripes */
+    }
+
+    /* LAYER 2: Black Box (Union) with Fixed Size */
+    .union {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 150px; /* Fixed width for the black box */
+      height: 100px; /* Fixed height for the black box */
+      background-color: black;
+      z-index: 2; /* Union above the stripes */
+    }
+
+    /* LAYER 3: Stars inside the Union */
+    .union-stars {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 95%;
+      height: 95%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      padding: 0; /* Remove padding to tighten star spacing */
+      z-index: 3; /* Stars above the black box */
+    }
+
+    /* Individual rows of stars */
+    .row {
+      display: flex;
+      justify-content: space-between;
+      margin-left: 4px;
+      margin-bottom: -2px; /* Reduce margin between rows */
+      width: 100%;
+    }
+
+    .row:nth-child(even) {
+      justify-content: space-around; /* Closer spacing for the rows with 5 stars */
+    }
+
+    /* Individual star */
+    .star {
+      width: 12px; /* Star size */
+      height: 12px;
+      background-color: white;
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    }
+  </style>
+</head>
+<body>
+  <div class="flag">
+    <!-- LAYER 1: Stripes -->
+    <div class="stripe black-stripe remaining-stripe"></div>
+    <div class="stripe white-stripe remaining-stripe"></div>
+    <div class="stripe black-stripe remaining-stripe"></div>
+
+    <!-- Blue Stripe (N% of flag height) -->
+    <div class="stripe blue-stripe"></div>
+
+    <!-- Remaining Stripes -->
+    <div class="stripe black-stripe remaining-stripe"></div>
+    <div class="stripe white-stripe remaining-stripe"></div>
+    <div class="stripe black-stripe remaining-stripe"></div>
+
+    <!-- LAYER 2: Black Union Box -->
+    <div class="union">
+      <!-- LAYER 3: Stars inside the Union -->
+      <div class="union-stars">
+        <!-- Row 1 (6 stars) -->
+        <div class="row">
+          <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+        </div>
+        <!-- Row 2 (5 stars) -->
+        <div class="row">
+          <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+        </div>
+        <!-- Row 3 (6 stars) -->
+        <div class="row">
+          <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+        </div>
+        <!-- Row 4 (5 stars) -->
+        <div class="row">
+          <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+        </div>
+        <!-- Row 5 (6 stars) -->
+        <div class="row">
+          <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+        </div>
+        <!-- Row 6 (5 stars) -->
+        <div class="row">
+          <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+        </div>
+        <!-- Row 7 (6 stars) -->
+        <div class="row">
+          <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+     <!-- Circle representing cities -->
+<circle class="city" id="chicago" cx="706" cy="206" r="5" fill="blue" />
+<circle class="city" id="sf" cx="165" cy="258" r="5" fill="blue" />
+<circle class="city" id="la" cx="210" cy="344" r="5" fill="blue" />
+<circle class="city" id="lv" cx="273" cy="312" r="5" fill="blue" />
+<circle class="city" id="slc" cx="333" cy="227" r="5" fill="blue" />
+<circle class="city" id="pdx" cx="202" cy="99" r="5" fill="blue" />
+<circle class="city" id="sea" cx="212" cy="65" r="5" fill="blue" />
+<circle class="city" id="spokane" cx="286" cy="70" r="5" fill="blue" />
+<circle class="city" id="missoula" cx="325" cy="101" r="5" fill="blue" />
+<circle class="city" id="eureka" cx="157" cy="185" r="5" fill="blue" />
+<circle class="city" id="mpls" cx="618" cy="150" r="5" fill="blue" />
+<circle class="city" id="stpl" cx="620" cy="149" r="5" fill="blue" />
+<circle class="city" id="las vegas" cx="274" cy="308" r="5" fill="blue" />
+<circle class="city" id="denver" cx="447" cy="263" r="5" fill="blue" />
+<circle class="city" id="topeka" cx="589" cy="273" r="5" fill="blue" />
+<circle class="city" id="cheyanne" cx="448" cy="229" r="5" fill="blue" />
+<circle class="city" id="rapid city" cx="473" cy="175" r="5" fill="blue" />
+<circle class="city" id="mobile" cx="730" cy="432" r="5" fill="blue" />
+<circle class="city" id="birmingham" cx="740" cy="365" r="5" fill="blue" />
+<circle class="city" id="atlanta" cx="787" cy="350" r="5" fill="blue" />
+<circle class="city" id="nola" cx="694" cy="448" r="5" fill="blue" />
+<circle class="city" id="baton rouge" cx="677" cy="437" r="5" fill="blue" />
+<circle class="city" id="houston" cx="599" cy="456" r="5" fill="blue" />
+<circle class="city" id="dallas" cx="578" cy="399" r="5" fill="blue" />
+<circle class="city" id="nyc" cx="885" cy="245" r="5" fill="blue" />
+<circle class="city" id="Washington DC" cx="860" cy="270" r="5" fill="blue" />
+<circle class="city" id="Miami" cx="845" cy="520" r="5" fill="blue" />
+<circle class="city" id="Boston" cx="910" cy="210" r="5" fill="blue" />
+<circle class="city" id="Philadelphia" cx="870" cy="250" r="5" fill="blue" />
+<circle class="city" id="Detroit" cx="775" cy="210" r="5" fill="blue" />
+<circle class="city" id="Phoenix" cx="425" cy="375" r="5" fill="blue" />
+<circle class="city" id="San Diego" cx="230" cy="400" r="5" fill="blue" />
+<circle class="city" id="San Antonio" cx="590" cy="470" r="5" fill="blue" />
+<circle class="city" id="Austin" cx="580" cy="460" r="5" fill="blue" />
+<circle class="city" id="Nashville" cx="760" cy="320" r="5" fill="blue" />
+<circle class="city" id="Memphis" cx="740" cy="340" r="5" fill="blue" />
+<circle class="city" id="Indianapolis" cx="750" cy="240" r="5" fill="blue" />
+<circle class="city" id="Cleveland" cx="815" cy="225" r="5" fill="blue" />
+<circle class="city" id="Pittsburgh" cx="835" cy="240" r="5" fill="blue" />
+<circle class="city" id="Charlotte" cx="835" cy="320" r="5" fill="blue" />
+<circle class="city" id="Raleigh" cx="850" cy="310" r="5" fill="blue" />
+<circle class="city" id="Orlando" cx="810" cy="470" r="5" fill="blue" />
+<circle class="city" id="Tampa" cx="800" cy="460" r="5" fill="blue" />
+<circle class="city" id="Jacksonville" cx="820" cy="440" r="5" fill="blue" />
+<circle class="city" id="Kansas City" cx="615" cy="270" r="5" fill="blue" />
+<circle class="city" id="Omaha" cx="580" cy="210" r="5" fill="blue" />
+<circle class="city" id="Albuquerque" cx="490" cy="350" r="5" fill="blue" />
+<circle class="city" id="Oklahoma City" cx="590" cy="340" r="5" fill="blue" />
+<circle class="city" id="Little Rock" cx="635" cy="350" r="5" fill="blue" />
+<circle class="city" id="St. Louis" cx="670" cy="275" r="5" fill="blue" />
+<circle class="city" id="Louisville" cx="730" cy="280" r="5" fill="blue" />
+
+    <!-- Optional: Text to show city names on hover -->
+    <text id="city-name" x="0" y="0" visibility="hidden" fill="black" font-size="16" font-family="Arial"></text>
+
+    <style>
+        /* CSS for hover effects */
+        .city:hover {
+            fill: red;
+            cursor: pointer;
+        }
+    </style>
+
+    <script>
+        // Add city names for display on hover
+            const cities = {
+               nyc: {name: "New York"}
+            }
+//         const cities = {
+//             chicago: 'Chicago',
+// sf: 'Sf',
+// la: 'La',
+// lv: 'Lv',
+// slc: 'Slc',
+// pdx: 'Pdx',
+// sea: 'Sea',
+// spokane: 'Spokane',
+// missoula: 'Missoula',
+// eureka: 'Eureka',
+// mpls: 'Mpls',
+// stpl: 'Stpl',
+// vegas: 'Las Vegas',
+// denver: 'Denver',
+// topeka: 'Topeka',
+// cheyanne: 'Cheyanne',
+// rapidcity: 'RapidCity',
+// mobile: 'Mobile',
+// birmingham: 'Birmingham',
+// atlanta: 'Atlanta',
+// nola: 'Nola',
+// batonrouge: 'BatonRouge',
+// houston: 'Houston',
+// dallas: 'Dallas',
+// nyc: 'New York City',
+// WashingtonDC: 'WashingtonDc',
+// Miami: 'Miami',
+// Boston: 'Boston',
+// Philadelphia: 'Philadelphia',
+// Detroit: 'Detroit',
+// Phoenix: 'Phoenix',
+// sd: 'San\ Diego',
+// stx: 'SanAntonio',
+// Austin: 'Austin',
+// Nashville: 'Nashville',
+// Memphis: 'Memphis',
+// Indianapolis: 'Indianapolis',
+// Cleveland: 'Cleveland',
+// Pittsburgh: 'Pittsburgh',
+// Charlotte: 'Charlotte',
+// Raleigh: 'Raleigh',
+// Orlando: 'Orlando',
+// Tampa: 'Tampa',
+// Jacksonville: 'Jacksonville',
+// KansasCity: 'Kansas\ City',
+// Omaha: 'Omaha',
+// Albuquerque: 'Albuquerque',
+// okc: 'Oklahoma\ City',
+// lrk: 'Little\ Rock',
+// stl: 'St.\ Louis',
+// Louisville: 'Louisville',
+//         };
+
+        // Show the city name on hover
+        document.querySelectorAll('.city').forEach(circle => {
+            circle.addEventListener('mouseover', function() {
+                const cityName = cities[this.id];
+                const textElement = document.getElementById('city-name');
+                textElement.textContent = cityName;
+                textElement.setAttribute('x', parseFloat(this.getAttribute('cx')) + 5);
+                textElement.setAttribute('y', parseFloat(this.getAttribute('cy')) - 5);
+                textElement.setAttribute('visibility', 'visible');
+            });
+
+            circle.addEventListener('mouseout', function() {
+                const textElement = document.getElementById('city-name');
+                textElement.setAttribute('visibility', 'hidden');
+            });
+
+            // Add click event to do something when the city is clicked
+            circle.addEventListener('click', function() {
+                const city = this.id;
+                const cityData = cities[city];
+
+                // Update the city name text block
+                const cityNameElement = document.getElementById('selected-city-name');
+                cityNameElement.textContent = `City: ${cityData.name}`;
+
+                console.log(`City clicked: ${cityData.name}, flag size: ${cityData.flagSize}`);
+            });
+        });
+  </script>
+
+  <script>
+    // Function to get URL parameters
+    function getUrlParameter(name) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(name);
+    }
+
+    // Get the blue line percentage from the URL parameter 'blueLine' (default is 30%)
+    const blueLinePercentage = getUrlParameter('blueLine') || 30;
+
+    // Set the CSS variable for blue line height
+    document.documentElement.style.setProperty('--blue-line-height', blueLinePercentage + '%');
+  </script>
+</body>
+</html>

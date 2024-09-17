@@ -1,0 +1,102 @@
+/* General Body Styles */
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+/* Container for the Map */
+#map-container {
+  position: relative;
+  width: 960px;
+  margin: 0 auto;
+}
+
+/* Style for the city name text */
+#selected-city-name {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+/* Style for centering the flag in relation to the map */
+#flag-container {
+  margin-top: 20px;
+}
+
+/* Flag Styles */
+.flag {
+  width: 400px;
+  height: 240px;
+  margin: 0 auto;
+  position: relative;
+  border: 1px solid black;
+}
+
+/* LAYER 1: Stripes */
+.stripe {
+  width: 100%;
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+.black-stripe {
+  background-color: black;
+}
+
+.white-stripe {
+  background-color: white;
+}
+
+.blue-stripe {
+  background-color: #0000ff;
+  height: var(--blue-line-height);
+}
+
+.remaining-stripe {
+  height: calc((100% - var(--blue-line-height)) / 6);
+}
+
+/* LAYER 2: Black Union Box */
+.union {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 150px;
+  height: 100px;
+  background-color: black;
+  z-index: 2;
+}
+
+/* LAYER 3: Stars inside the Union */
+.union-stars {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 95%;
+  height: 95%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  z-index: 3;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 4px;
+  margin-bottom: -2px;
+  width: 100%;
+}
+
+.row:nth-child(even) {
+  justify-content: space-around;
+}
+
+/* Individual star */
+.star {
+  width: 12px;
+  height: 12px;
+  background-color: white;
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive US Map</title>
+
+  <!-- Link to the external CSS file -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Text that displays the name of the selected city -->
+  <div id="selected-city-name">Hover over a city</div>
+
+  <!-- Flag container below the map -->
+  <div id="flag-container">
+    <!-- This div will hold the dynamic flag (already styled) -->
+    <div class="flag" id="flag">
+      <!-- Flag content as already implemented -->
+      <div class="stripe black-stripe remaining-stripe"></div>
+      <div class="stripe white-stripe remaining-stripe"></div>
+      <div class="stripe black-stripe remaining-stripe"></div>
+      <div class="stripe blue-stripe"></div>
+      <div class="stripe black-stripe remaining-stripe"></div>
+      <div class="stripe white-stripe remaining-stripe"></div>
+      <div class="stripe black-stripe remaining-stripe"></div>
+      <div class="union">
+      <!-- LAYER 3: Stars inside the Union -->
+      <div class="union-stars">
+        <!-- Row 1 (6 stars) -->
+        <div class="row">
+          <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+        </div>
+        <!-- Row 2 (5 stars) -->
+        <div class="row">
+          <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+        </div>
+        <!-- Row 3 (6 stars) -->
+        <div class="row">
+          <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+        </div>
+        <!-- Row 4 (5 stars) -->
+        <div class="row">
+          <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+        </div>
+        <!-- Row 5 (6 stars) -->
+        <div class="row">
+          <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+        </div>
+        <!-- Row 6 (5 stars) -->
+        <div class="row">
+          <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+        </div>
+        <!-- Row 7 (6 stars) -->
+        <div class="row">
+          <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <!-- Container to hold the SVG map -->
+  <div id="map-container">
+    <!-- The map will load from the external SVG file -->
+    <object id="svg-map" type="image/svg+xml" data="us.svg" width="960" height="600"></object>
+  </div>
+
+
+  <!-- Link to the external JavaScript file -->
+  <script src="tbl_script.js"></script>
+</body>
+</html>
