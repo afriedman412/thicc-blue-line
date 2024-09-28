@@ -1,8 +1,7 @@
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
+  font-family: 'Courier New', Courier, monospace;
+    text-align: left;
     margin: 0;
-    margin-top: 20px;
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -19,6 +18,21 @@ body {
     display: flex;
 }
 
+.title-container {
+  margin: 30px auto;
+  text-align: center;
+  justify-content: center;
+  width: 1000px;
+  display: flex;
+  font-size: 84px ;
+  font-weight: bolder;
+  text-transform: uppercase;
+}
+
+.blurb-container {
+  width: 1000px;
+}
+
 .upper-container {
     margin: 0 auto;
     width: 500px;
@@ -26,14 +40,32 @@ body {
     
 }
 
+#budget-info {
+  font-size: 24px;
+  display: block;
+  width: 400px;
+}
+
+.budget-info-title {
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.budget-info-data {
+  margin-bottom: 15px;  /* Adjust this value as needed */
+  display: block;
+}
+
 /* Flag Styles */
-  .flag {
-    width: 400px;
-    height: 240px;
-    margin: 0 auto;
-    position: relative;
-    border: 1px solid black;
-  }
+.flag {
+  width: 400px;
+  height: 240px;
+  margin: 0 auto;
+  position: relative;
+  border: 1px solid black;
+  box-shadow: 10px 5px 5px darkred;
+}
 
   /* LAYER 1: Stripes */
 .stripe {
@@ -116,12 +148,12 @@ body {
   }
   
   /* Style for the city name text */
-  #selected-city-name {
+#selected-city-name {
+    text-transform: uppercase;
     margin-bottom: 20px;
     font-size: 24px;
     color: #333;
   }
-  
 
 circle {
     fill: #3498db;
@@ -129,7 +161,9 @@ circle {
   }
   
 circle:hover {
-    fill: #e74c3c;
+    fill: darkred;
+    stroke: darkred;
+    stroke-width: 5px;
   }
   
 #tooltip {

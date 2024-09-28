@@ -7,7 +7,10 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+   <div class="title-container">the thicc blue line</div>
+   <div class="blurb-container"></div>
 <div id="main">
+
     <div class="upper-container" id="flag">
     <div class="flag">
         <!-- LAYER 1: Stripes -->
@@ -59,13 +62,20 @@
         </div>
     </div>
     </div>
-    <div class="upper-container" id="budget-info">XXXXXX</div>
+    <div class="upper-container" id="budget-info">
+      <span class="budget-info-title">city name:</span>
+      <span class="budget-info-data" id="city">n/a</span>
+      <span class="budget-info-title">police budget:</span>
+      <span class="budget-info-data" id="police">n/a</span>
+      <span class="budget-info-title">total budget:</span>
+      <span class="budget-info-data" id="total">n/a</span>
+      <span class="budget-info-title">percentage:</span>
+      <span class="budget-info-data" id="pct">n/a</span>
+    </div>
 </div>
 
 
 </div>
-    <!-- Text that displays the name of the selected city -->
-    <div id="details-box"></div>
   
     <!-- Container to hold the SVG map -->
 <div id="map-container">
@@ -85,12 +95,12 @@
      xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
      xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
      enable_background="new 0 0 1000 589"
-     height="589px"
+     height="450px"
      pretty_print="False"
      style="stroke-linejoin: round; stroke:#000; fill: none;"
      version="1.1"
      viewBox="0 0 1000 589"
-     width="1000px"
+     width="850px"
      id="map"
      inkscape:version="0.48.4 r9939"
      sodipodi:docname="us.svg">
@@ -522,7 +532,10 @@
                 .then(data => {
                     const svg = document.getElementById('map');
                     const tooltip = document.getElementById('tooltip');
-                    const budgetInfoBox = document.getElementById('budget-info');
+                    const citySpan = document.getElementById('city');
+                    const policeSpan = document.getElementById('police');
+                    const totalSpan = document.getElementById('total')
+                    const pctSpan = document.getElementById('pct');
                     const flagBox = document.getElementById('flag');
         
                     data.forEach(city => {
@@ -532,7 +545,7 @@
                         circle.setAttribute("name", city.name);
                         circle.setAttribute("cx", city.cx);
                         circle.setAttribute("cy", city.cy);
-                        circle.setAttribute("r", "2");
+                        circle.setAttribute("r", "3.5");
         
                         // Event listeners for tooltip
                         circle.addEventListener('mouseover', function(e) {
@@ -561,13 +574,24 @@
                                 .then(data => {
                                     let cityData = data[this.getAttribute('id')];
                                     if (cityData) {
-                                        budgetInfoBox.innerHTML = `CITY NAME: ${cityData.name}<br>TOTAL BUDGET: $${cityData.totalBudget}<br>POLICE BUDGET: $${cityData.policeBudget}`;
-        
-                                        if (flagBox) {
-                                            const policeBudgetPercentage = (cityData.policeBudget / cityData.totalBudget) * 100;
+                                       const formatter = new Intl.NumberFormat('en-US', {
+                                       style: 'currency',
+                                       currency: 'USD',
+                                       minimumFractionDigits: 2
+                                    });
 
-                                            // Update the flag with this new value
-                                            const flag = document.getElementById('flag'); // Ensure your flag container has this ID
+                                       const totalBudgetFormatted = formatter.format(cityData.totalBudget);
+                                       const policeBudgetFormatted = formatter.format(cityData.policeBudget);
+                                       const policeBudgetPercentage = Math.round((cityData.policeBudget / cityData.totalBudget) * 100);
+                                       citySpan.innerHTML = `${cityData.name}`
+                                       policeSpan.innerHTML = `${policeBudgetFormatted}`
+                                       totalSpan.innerHTML = `${totalBudgetFormatted}`
+                                       pctSpan.innerHTML = `${policeBudgetPercentage}%`
+
+        
+                                       if (flagBox) {
+                                            const policeBudgetPercentage = (cityData.policeBudget / cityData.totalBudget) * 100;
+                                            const flag = document.getElementById('flag');
                                             flag.style.setProperty('--blue-line-height', `${policeBudgetPercentage}%`);
                                         }
                                     } else {
