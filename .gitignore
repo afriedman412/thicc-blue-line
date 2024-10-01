@@ -2,3 +2,4 @@
 trash/*
 *.ipynb*
 __pycache__*
+venv/

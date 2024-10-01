@@ -1,0 +1,195 @@
+body {
+  font-family: 'Courier New', Courier, monospace;
+    text-align: left;
+    margin: 0;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+  }
+
+:root {
+    --blue-line-height: 30;  /* Initial value to ensure layout isn't broken */
+}
+
+#main {
+    width: 1000px;
+    margin: 0 auto;
+    display: flex;
+}
+
+.title-container {
+  margin: 30px auto;
+  text-align: center;
+  justify-content: center;
+  width: 1000px;
+  display: flex;
+  font-size: 84px ;
+  font-weight: bolder;
+  text-transform: uppercase;
+}
+
+.blurb-container {
+  width: 1000px;
+}
+
+.upper-container {
+    margin: 0 auto;
+    width: 500px;
+    overflow: visible
+    
+}
+
+#budget-info {
+  font-size: 24px;
+  display: block;
+  width: 400px;
+}
+
+.budget-info-title {
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.budget-info-data {
+  margin-bottom: 15px;  /* Adjust this value as needed */
+  display: block;
+}
+
+/* Flag Styles */
+.flag {
+  width: 400px;
+  height: 240px;
+  margin: 0 auto;
+  position: relative;
+  border: 1px solid black;
+  box-shadow: 10px 5px 5px darkred;
+}
+
+  /* LAYER 1: Stripes */
+.stripe {
+    width: 100%;
+    position: relative; /* Stripes follow normal flow */
+    margin: 0;
+    padding: 0;
+  }
+
+.black-stripe {
+    background-color: black;
+  }
+.white-stripe {
+    background-color: white;
+  }
+.blue-stripe {
+    background-color: #0000ff;
+    height: var(--blue-line-height);
+    min-height: 1px; /* Prevent stripes from disappearing */
+  }
+
+.remaining-stripe {
+    height: calc((100% - var(--blue-line-height)) / 6); /* Remaining height divided by 6 stripes */
+    min-height: 1px; /* Prevent stripes from disappearing */
+  }
+
+/* LAYER 2: Black Box (Union) with Fixed Size */
+.union {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 150px; /* Fixed width for the black box */
+    height: 100px; /* Fixed height for the black box */
+    background-color: black;
+    z-index: 2; /* Union above the stripes */
+  }
+
+  /* LAYER 3: Stars inside the Union */
+.union-stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 95%;
+    height: 95%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 0; /* Remove padding to tighten star spacing */
+    z-index: 3; /* Stars above the black box */
+  }
+
+
+/* Individual rows of stars */
+.row {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 4px;
+    margin-bottom: -2px; /* Reduce margin between rows */
+    width: 100%;
+  }
+
+.row:nth-child(even) {
+    justify-content: space-around; /* Closer spacing for the rows with 5 stars */
+  }
+
+
+/* Individual star */
+.star {
+    width: 12px; /* Star size */
+    height: 12px;
+    background-color: white;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  }
+  
+/* Container for the Map */
+#map-container {
+    position: relative;
+    width: 960px;
+    margin: 0 auto;
+  }
+  
+  /* Style for the city name text */
+#selected-city-name {
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+  }
+
+circle {
+    fill: #3498db;
+    transition: fill 0.2s ease;
+  }
+  
+circle:hover {
+    fill: darkred;
+    stroke: darkred;
+    stroke-width: 5px;
+  }
+  
+#tooltip {
+    display: none;
+    position: absolute;
+    padding: 4px;
+    background-color: white;
+    border: 1px solid black;
+    pointer-events: none;
+    z-index: 1000;
+    white-space: nowrap;
+  }
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+ 
+  
