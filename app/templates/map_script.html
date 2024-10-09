@@ -1,0 +1,53 @@
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+          fetch('{{ config["COORDINATES_PATH"] }}')
+             .then(response => {
+                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+                return response.json();
+             })
+             .then(data => {
+                const svg = document.getElementById('map');
+                const tooltip = document.getElementById('tooltip');
+                const citySpan = document.getElementById('city');
+                const policeSpan = document.getElementById('police');
+                const totalSpan = document.getElementById('total')
+                const pctSpan = document.getElementById('pct');
+                const flagBox = document.getElementById('flag');
+    
+                data.forEach(city => {
+                      const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                      circle.setAttribute("class", "city");
+                      circle.setAttribute("id", city.id);
+                      circle.setAttribute("name", city.name);
+                      circle.setAttribute("cx", city.cx);
+                      circle.setAttribute("cy", city.cy);
+                      circle.setAttribute("r", "5");
+    
+                      // Event listeners for tooltip
+                      circle.addEventListener('mouseover', function(e) {
+                         tooltip.style.display = 'block';
+                         tooltip.style.left = (e.clientX + 10) + 'px';
+                         tooltip.style.top = (e.clientY + 10) + 'px';
+                         tooltip.textContent = this.getAttribute('name');
+                      });
+    
+                      circle.addEventListener('mousemove', function(e) {
+                         tooltip.style.left = (e.clientX + 10) + 'px';
+                         tooltip.style.top = (e.clientY + 10) + 'px';
+                      });
+    
+                      circle.addEventListener('mouseout', function() {
+                         tooltip.style.display = 'none';
+                      });
+    
+                      circle.addEventListener('click', function() {
+                         console.log("Circle clicked: ", this.getAttribute('name'), "(", this.getAttribute('cx'), ",", this.getAttribute('cy'),")");
+                         window.location.href = `/${city.id.replace("_", "/")}`;
+                      });
+    
+                      svg.appendChild(circle);
+                });
+             })
+             .catch(error => console.error('Error loading city data:', error));
+    });
+    </script>
