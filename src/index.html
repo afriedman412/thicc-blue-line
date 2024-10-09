@@ -526,7 +526,7 @@
          <div id="tooltip"></div>
          <script>
          document.addEventListener("DOMContentLoaded", function() {
-               fetch('http://localhost:8000/city_locations.json')
+               fetch('https://thicc-blue-bucket.s3.us-east-2.amazonaws.com/city_locations.json')
                   .then(response => {
                      if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
                      return response.json();
@@ -568,7 +568,7 @@
          
                            circle.addEventListener('click', function() {
                               console.log("Circle clicked: ", this.getAttribute('name'), "(", this.getAttribute('cx'), ",", this.getAttribute('cy'),")");
-                              fetch('http://localhost:8000/budget_data.json')
+                              fetch('https://thicc-blue-bucket.s3.us-east-2.amazonaws.com/budget_data.json')
                                  .then(response => {
                                        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
                                        return response.json();
