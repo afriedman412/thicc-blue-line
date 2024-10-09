@@ -1,7 +1,6 @@
 body {
   font-family: 'Courier New', Courier, monospace;
-  text-align: left;
-  margin: 0;
+  margin: 2vh auto 1vh;
   width: 85%;
   justify-content: center;
   align-items: center;
@@ -17,9 +16,7 @@ body {
 .flex-grid {
   display: flex;
   flex-wrap: wrap;
-  /* Allows items to wrap to the next row */
   gap: 2vh;
-  /* Optional spacing between rows and boxes */
   max-width: 850px;
   margin: 0 auto;
 }
@@ -27,75 +24,37 @@ body {
 /* Row 1: 20% of viewport height */
 .title-row {
   flex: 1 1 100%;
-  height: 10vh;
-  background-color: lightblue;
   font-weight: bolder;
   text-transform: uppercase;
   text-align: center;
-  font-size: 4.5em;
+  font-size: clamp(2.5em, 4vw, 84px)
 }
 
-/* Row 2: 27.5% of viewport height */
 .data-row {
   flex: 1 1 40%;
   height: 27.5vh;
-  /* 27.5% of viewport height */
-  background-color: lightgreen;
   margin-left: 5%;
+  font-size: 1.2em;
 }
 
-/* Row 3: 45% of viewport height */
 .map-row {
   flex: 1 1 100%;
   height: 45vh;
-  /* 45% of viewport height */
-  background-color: lightcoral;
-}
-
-#main {
-  width: 1000px;
-  margin: 0 auto;
-  display: flex;
-}
-
-.title-container {
-  margin: 30px auto;
-  text-align: center;
-  justify-content: center;
-  display: inline-block;
-  font-size: 84px;
-  font-weight: bolder;
-  text-transform: uppercase;
-}
-
-.upper-container {
-  margin: 0 auto;
-  width: 500px;
-  overflow: visible
-}
-
-#budget-info {
-  font-size: 24px;
-  display: block;
-  width: 400px;
 }
 
 .budget-info-title {
   text-transform: uppercase;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: 20vh;
 }
 
 .budget-info-data {
   margin-bottom: 15px;
-  /* Adjust this value as needed */
   display: block;
 }
 
 /* Flag Styles */
 .flag {
-  width: 400px;
-  height: 240px;
   margin: 0 auto;
   position: relative;
   border: 1px solid black;
@@ -138,9 +97,11 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  width: 150px;
+  width: 15vw;
+  max-width: 150px;
   /* Fixed width for the black box */
-  height: 100px;
+  height: 10vh;
+  max-height: 100px;
   /* Fixed height for the black box */
   background-color: black;
   z-index: 2;
@@ -168,8 +129,8 @@ body {
 .row {
   display: flex;
   justify-content: space-between;
-  margin-left: 4px;
-  margin-bottom: -2px;
+  margin-left: 0.04vw;
+  margin-bottom: -0.02vh;
   /* Reduce margin between rows */
   width: 100%;
 }
@@ -182,24 +143,19 @@ body {
 
 /* Individual star */
 .star {
-  width: 12px;
+  width: 1.2vw;
+  max-width: 12px;
   /* Star size */
-  height: 12px;
+  height: 1.2vh;
+  max-height: 12px;
   background-color: white;
   clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-}
-
-/* Container for the Map */
-#map-container {
-  position: relative;
-  width: 960px;
-  margin: 0 auto;
 }
 
 /* Style for the city name text */
 #selected-city-name {
   text-transform: uppercase;
-  margin-bottom: 20px;
+  margin-bottom: 0.2vh;
   font-size: 24px;
   color: #333;
 }
@@ -212,7 +168,7 @@ circle {
 circle:hover {
   fill: darkred;
   stroke: darkred;
-  stroke-width: 5px;
+  stroke-width: 7px;
 }
 
 #tooltip {
