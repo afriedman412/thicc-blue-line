@@ -1,59 +1,36 @@
 import pandas as pd
 import json
+from data_prep_helpers import download_google_sheet, upload_to_s3, process_budget_data, load_coords, combine_data
+from dotenv import load_dotenv
 
-budget_path = "budget_data.csv"
-year = 2024
+year = '2024'
 
-df = pd.read_csv(budget_path)
-df['id'] = df.apply(
-    lambda r: "_".join(
-        [r['state'].lower(), r['city'].lower()]
-    ).replace(" ", ""), 1
-)
-df['name'] = df.apply(
-    lambda r: ", ".join(
-        [r['city'].title(), r['state']]
-    ), 1
-)
-df['budget_type'] = df.apply(
-    lambda r: r['expense'].lower()[0] + str(r['year'])[-2:], 1
-)
+SPREADSHEET_ID = '1SqS5Xc7UrbuYiRY6Rcx3MYzDu7BXihvcclJjKQdWOCg'
+RANGE_NAME = 'annotations_reformed!A1:F99999'
+BUCKET_NAME = 'thicc-blue-bucket'
 
-budget_df = df.query("year==@year & expense!='Education'")[['id', 'name', 'expense', 'year', 'budget']].set_index(['id', 'name']).pivot(
-    columns='expense', values=['budget']
-)
-budget_df.columns = ['general_fund', 'police']
-budget_df.reset_index(inplace=True)
+load_dotenv()
 
-budget_df['police'] = budget_df['police'].fillna('1')
-budget_df['general_fund'] = budget_df['general_fund'].fillna('5')
+print('getting budget data...')
+df = download_google_sheet(SPREADSHEET_ID, RANGE_NAME)
 
-coords = pd.read_csv('coordinate_df.csv').query("use=='x'")
-coords['id'] = coords.apply(
-    lambda r: "_".join(
-        [r['state'].lower(), r['city'].lower()]
-    ).replace(" ", ""), 1
-)
-
-big_df = pd.merge(coords, budget_df, on='id')
-for c in ['police', 'general_fund']:
-    big_df[c] = big_df[c].map(lambda p: p.replace("$", "").replace(",", ""))
-
-city_locations_df = big_df.rename(
-            columns={'x':'cx', 'y':'cy'}
-        )[['id', 'name', 'cx', 'cy']].dropna()
-
-budget_data_df = big_df.rename(
-            columns={'police':'policeBudget', 'general_fund':'totalBudget'}
-        ).set_index('id')[['name', 'policeBudget', 'totalBudget']]
-
-with open("src/city_locations.json", "w+") as f:
+print('processing data...')
+budget_df = process_budget_data(df)
+coords_df = load_coords()
+city_locations_df, budget_data_df = combine_data(coords_df, budget_df)
+with open("city_locations.json", "w+") as f:
     json.dump(
         city_locations_df.dropna().to_dict('records'), f)
     
-with open("src/budget_data.json", "w+") as f:
+with open("budget_data.json", "w+") as f:
     json.dump(
         budget_data_df.dropna().to_dict('index'), f
     )
 
-print("SUCCESS! GO UPLOAD THEM TO S3.")
+for j in ['city_locations', 'budget_data']:
+    j += '.json'
+    print(f'uploading {j}...')
+    upload_to_s3(j, BUCKET_NAME, j)
+
+print("MISSING DATA:")
+print(budget_data_df[budget_data_df['policeBudget'].map(float) < 2]['name'])

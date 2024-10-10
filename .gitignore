@@ -3,3 +3,7 @@ trash/*
 *.ipynb*
 __pycache__*
 venv/
+.env
+*.csv
+*.json
+Makefile
