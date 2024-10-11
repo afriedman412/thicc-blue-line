@@ -1,6 +1,6 @@
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-          fetch('{{ config["COORDINATES_PATH"] }}')
+          fetch("{{ url_for('static', filename='city_locations.json') }}")
              .then(response => {
                 if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
                 return response.json();

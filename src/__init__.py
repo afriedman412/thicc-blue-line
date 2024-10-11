@@ -1,11 +1,15 @@
-from flask import Flask, render_template, request, Response
+from flask import Flask, render_template, request, Response, url_for
 import requests
-from .helpers import get_muni_data, generate_plot_points
+from .helpers import generate_plot_points
+import json
+import os
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object("config.Config")
-    app.config['BUDGET_DATA'] = requests.get(app.config['BUDGET_PATH']).json()
+    app.config['BUDGET_DATA'] = json.load(open(
+        os.path.join(app.root_path, 'static', 'budget_data.json'))
+    )
     app.config['PLOT_POINTS'] = generate_plot_points(app.config['BUDGET_DATA'])
     app.config['SCATTER'] = False
 
@@ -35,16 +39,6 @@ def create_app():
             'PLOT_POINTS': app.config['PLOT_POINTS'],
             'SCATTER': app.config['SCATTER']
             }
-    
-    @app.route('/clean/')
-    @app.route('/clean/<state>/<city>')
-    def zzz(state=None, city=None):
-        # location, police_budget, total_budget, pct = get_muni_data(state, city)
-        return render_template(
-            'index.html',
-            city=city,
-            state=state
-        )
 
     @app.route('/')
     @app.route('/<state>/<city>')
@@ -56,14 +50,6 @@ def create_app():
             state=state
         )
     
-    @app.route('/plot/')
-    @app.route('/plot/<state>/<city>')
-    def plot_test(state=None, city=None):
-        return render_template(
-            'index.html',
-            IMAGE_PAGE='scatter.html'
-            )
-    
     @app.route('/tbl.css')
     def tbl_css():
         line_height = request.args.get('line_height')
@@ -73,20 +59,9 @@ def create_app():
             }}
         """
         return Response(css, mimetype='text/css')
-    
-
-
-
-        
 
     @app.route('/test')
     def testo():
         return "test"
-    
-    
-
-    # # Register blueprints or routes here
-    # from .routes import main
-    # app.register_blueprint(main)
 
     return app

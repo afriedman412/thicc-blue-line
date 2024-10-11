@@ -14,11 +14,11 @@ ENV LC_ALL=en_US.UTF-8
 
 ADD src /app/src
 ADD requirements.txt /app/requirements.txt
-ADD run.py /app/run.py
+ADD app.py /app/app.py
 ADD config.py /app/config.py
 WORKDIR /app
 
 RUN pip install --no-cache-dir -r requirements.txt
 
 EXPOSE 8000
-CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:8000", "run:app"]
+CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:8000", "app:app"]
