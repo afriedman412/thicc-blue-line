@@ -1,0 +1,22 @@
+   /* Ensure the image scales responsively */
+.plot-container {
+    width: 100%;
+    height: auto;
+}
+
+/* Container for the image to handle relative positioning of clickable areas */
+.scatter-plot {
+    position: relative;
+    width: 100%;
+    max-width: 500px; /* Set a max width to control scaling */
+}
+
+/* Clickable dots */
+.scatter-point {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: red;
+    transform: translate(-50%, -50%); /* Center the dots on the coordinates */
+}

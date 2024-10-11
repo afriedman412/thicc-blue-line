@@ -1,0 +1,12 @@
+
+
+<div class="grid-item plot-container">
+    <!-- Scatter plot image -->
+    <img src="{{ url_for('static', filename='plot_testo.png') }}" alt="Scatter Plot" class="scatter-plot">
+    
+    <!-- Loop through points to create clickable dots -->
+    {% for point in PLOT_POINTS %}
+    <a href="{{ url_for('main_page', city=point['city'], state=point['state']) }}" class="scatter-point" 
+       style="top: {{ 100 - point['p_norm'] * 10 }}%; left: {{ point['gf_norm'] * 10 }}%;"></a>
+    {% endfor %}
+</div>

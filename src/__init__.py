@@ -1,32 +1,68 @@
 from flask import Flask, render_template, request, Response
 import requests
-import locale
-
-locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
+from .helpers import get_muni_data, generate_plot_points
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object("config.Config")
     app.config['BUDGET_DATA'] = requests.get(app.config['BUDGET_PATH']).json()
+    app.config['PLOT_POINTS'] = generate_plot_points(app.config['BUDGET_DATA'])
+    app.config['SCATTER'] = False
 
-    @app.route('/')
-    def index():
-        return render_template('index.html', pct=30)
+    @app.template_filter('currency')
+    def currency_format(value):
+        if value == 0: 
+            return "n/a"
+        if isinstance(value, str):
+            value = float(value)
+        return "${:,.2f}".format(value)
     
-    @app.route('/<state>/<city>')
-    def localized(state, city):
-        local_data = app.config['BUDGET_DATA'].get('_'.join([state, city]), None)
-        location = local_data['name']
-        police_budget = locale.currency(float(local_data['policeBudget']), grouping=True)
-        total_budget = locale.currency(float(local_data['totalBudget']), grouping=True)
-        pct = float(local_data['policeBudget'])/float(local_data['totalBudget'])*100
+    @app.template_filter('pct')
+    def police_pct(police, total):
+        pct = "n/a"
+        police = float(police)
+        total = float(total)
+        try:
+            pct = str(int(police/total*100)) + "%"
+        except ZeroDivisionError:
+            pass
+        return pct
+
+    @app.context_processor
+    def inject_plot_points():
+        return {
+            'BUDGET_DATA': app.config['BUDGET_DATA'],
+            'PLOT_POINTS': app.config['PLOT_POINTS'],
+            'SCATTER': app.config['SCATTER']
+            }
+    
+    @app.route('/clean/')
+    @app.route('/clean/<state>/<city>')
+    def zzz(state=None, city=None):
+        # location, police_budget, total_budget, pct = get_muni_data(state, city)
         return render_template(
             'index.html',
-            location = location,
-            police_budget = police_budget,
-            total_budget = total_budget,
-            pct = int(pct)
+            city=city,
+            state=state
         )
+
+    @app.route('/')
+    @app.route('/<state>/<city>')
+    def main_page(state=None, city=None):
+        app.config['SCATTER'] = request.args.get('scatter', "False")
+        return render_template(
+            'index.html',
+            city=city,
+            state=state
+        )
+    
+    @app.route('/plot/')
+    @app.route('/plot/<state>/<city>')
+    def plot_test(state=None, city=None):
+        return render_template(
+            'index.html',
+            IMAGE_PAGE='scatter.html'
+            )
     
     @app.route('/tbl.css')
     def tbl_css():
@@ -37,6 +73,9 @@ def create_app():
             }}
         """
         return Response(css, mimetype='text/css')
+    
+
+
 
         
 

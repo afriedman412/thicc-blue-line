@@ -5,7 +5,8 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>The Thicc Blue Line</title>
       <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-      <link rel="stylesheet" type="text/css" href="/tbl.css?line_height={{ pct }}">
+      <link rel="stylesheet" type="text/css" href="/tbl.css?line_height={{ pct | default(30) }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='dynamic_plot.css') }}">
    </head>
    <body>
       <div class="flex-grid">
@@ -14,11 +15,11 @@
          <div class="grid-item data-row budget">
             {% include 'data.html' %}
          </div>
-         <div class="grid-item map-row map">
+         {% if SCATTER == 'True' %}
+            {% include 'scatter.html' %}
+         {% else %}
             {% include 'map.html' %}
-        </div>
-        <div id="tooltip"></div>
-        {% include 'map_script.html' %}
+         {% endif %}
     </div>
     </body>
     </html>
