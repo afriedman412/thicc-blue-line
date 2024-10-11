@@ -52,7 +52,10 @@ def create_app():
     
     @app.route('/tbl.css')
     def tbl_css():
-        line_height = request.args.get('line_height')
+        try:
+            line_height = int(request.args.get('line_height'))
+        except ValueError:
+            line_height = 30
         css = f"""
             :root {{
                 --blue-line-height: {line_height}%;
