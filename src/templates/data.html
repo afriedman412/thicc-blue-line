@@ -1,7 +1,3 @@
-{% set state = state or 'xx' %}
-{% set city = city or 'mookie' %}
-{% set key = state + '_' + city %}
-{% set budget_data = BUDGET_DATA.get(key, {'name': 'n/a'}) %}
 
 <span class="budget-info-title">city name:</span>
 <span class="budget-info-data" id="city">{{ budget_data['name'] | default('n/a') }}</span>
@@ -10,4 +6,4 @@
 <span class="budget-info-title">total budget:</span>
 <span class="budget-info-data" id="total">{{ budget_data.get('totalBudget', 0) | currency }}</span>
 <span class="budget-info-title">percentage:</span>
-<span class="budget-info-data" id="pct">{{ budget_data.get('policeBudget', 0) | pct(budget_data.get('totalBudget', 0)) | default('n/a')}}</span>
+<span class="budget-info-data" id="pct">{{ budget_data.get('policeBudget', 0) | pct(budget_data.get('totalBudget', 0)) | default('n/a')}}%</span>

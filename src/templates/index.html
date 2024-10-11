@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+   {% set state = state or 'xx' %}
+   {% set city = city or 'mookie' %}
+   {% set key = state + '_' + city %}
+   {% set budget_data = BUDGET_DATA.get(key, {'name': 'n/a'}) %}
    <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>The Thicc Blue Line</title>
       <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-      <link rel="stylesheet" type="text/css" href="/tbl.css?line_height={{ pct | default(30) }}">
+      <link rel="stylesheet" type="text/css" href="/tbl.css?line_height={{ budget_data.get('policeBudget', 0) | pct(budget_data.get('totalBudget', 0)) | default(30) }}">
       <link rel="stylesheet" href="{{ url_for('static', filename='dynamic_plot.css') }}">
    </head>
    <body>

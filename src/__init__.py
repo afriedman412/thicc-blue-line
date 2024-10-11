@@ -27,7 +27,7 @@ def create_app():
         police = float(police)
         total = float(total)
         try:
-            pct = str(int(police/total*100)) + "%"
+            pct = str(int(police/total*100))
         except ZeroDivisionError:
             pass
         return pct
